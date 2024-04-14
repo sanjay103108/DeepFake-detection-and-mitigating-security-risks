@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <title>Tutorial</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <h1 class="text-center"><b>Deepfake Detection</b></h1>
+
+        <form class="p-3 text-center" action='/', method="post" enctype="multipart/form-data">
+            <input class="form-control" type="file" name="imagefile" >
+            <input class="btn btn-primary mt-3"type="submit" value="Predict Image" >
+        </form>
+
+        {% if prediction %}
+            <p class="text-center"> Image is a {{prediction}}</p>
+        {% endif %}
+    </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deep Fake Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+            padding-top: 50px; /* Add some padding to the top */
+        }
+        .container {
+            max-width: 600px; /* Center the form and make it slightly wider */
+            background-color: #ffffff; /* White background for form */
+            padding: 40px; /* Add more padding */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1); /* Add a subtle shadow */
+        }
+        h1 {
+            color: #343a40; /* Dark gray color for heading */
+            margin-bottom: 30px; /* Add more space below the heading */
+            text-align: center; /* Center align the heading */
+            font-size: 32px; /* Increase font size of the heading */
+        }
+        .form-control {
+            margin-bottom: 30px; /* Add more space below each form input */
+            font-size: 18px; /* Increase font size of the form inputs */
+            height: 60px; /* Increase height of the form inputs */
+            border-radius: 10px; /* Rounded corners for the form inputs */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Blue primary button color */
+            border-color: #007bff; /* Blue primary button border color */
+            font-size: 20px; /* Increase font size of the button */
+            padding: 12px 40px; /* Increase padding of the button */
+            border-radius: 10px; /* Rounded corners for the button */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #0056b3; /* Darker blue border on hover */
+        }
+        .prediction {
+            margin-top: 30px; /* Add more space above the prediction */
+            font-weight: bold; /* Bold font for prediction */
+            font-size: 24px; /* Increase font size of the prediction */
+            text-align: center; /* Center align the prediction */
+        }
+        .uploaded-image {
+            margin-top: 30px; /* Add more space above the uploaded image */
+            display: block; /* Make the image a block element */
+            margin-left: auto; /* Center the image horizontally */
+            margin-right: auto; /* Center the image horizontally */
+            max-width: 100%; /* Limit the image width to 100% of its container */
+            height: auto; /* Automatically adjust the image height */
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Deep Fake Detection</h1>
+    <script>
+        function previewImage() {
+            var preview = document.querySelector('.uploaded-image');
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+    </script>
+
+    <form class="text-center" action='/' method="post" enctype="multipart/form-data">
+        <input class="form-control" type="file" name="imagefile" accept="image/*" onchange="previewImage()">
+        <input class="btn btn-primary" type="submit" value="Predict Image">
+        <img class="uploaded-image" src="">
+    </form>
+
+    {% if prediction %}
+        <p class="prediction">{{ prediction }}</p>
+    {% endif %}
+</div>
+</body>
+</html>
+
+
