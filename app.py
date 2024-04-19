@@ -6,7 +6,6 @@ from keras.applications.vgg16 import preprocess_input
 from keras.applications.vgg16 import decode_predictions
 import cv2
 import numpy as np
-from trial import arr
 #from keras.applications.vgg16 import VGG16
 # from keras.applications.resnet50 import ResNet50
 from keras.models import load_model
@@ -15,7 +14,6 @@ app = Flask(__name__)
 MODEL_PATH = r"C:\SANJU\CODING\SHUNYA_PROJECT\my_model.keras"
 # Load the model
 model = load_model(MODEL_PATH)
-valid1="Real Img"
 # model = ResNet50()
 
 @app.route('/', methods=['GET'])
@@ -55,8 +53,7 @@ def predict():
         classification="Real Image"
     print(arr)
     # classification = '%s (%.2f%%)' % (label[1], label[2]*100)
-    if(image_path in arr):
-        classification=valid1
+  
 
     return render_template('index.html', prediction=classification)
 
